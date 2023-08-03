@@ -1,0 +1,12 @@
+.block {
+  background-color: #eaecf4;
+}
+
+.image-upload .delete-image {
+  margin: 10px 0 0 10px;
+  position: absolute;
+  z-index: 999;
+}
+.image-upload .image-display {
+  position: relative;
+}

@@ -66,9 +66,13 @@ Route::middleware('checkLogin')->group(function (){
             Route::get('send-only-admin', [MailController::class, 'sendOnlyAdmin'])->name('sendOnlyAdmin');
         });
     });
-
-    Route::get('/search',[HomeController::class,'search'])->name('search');
-    Route::get('/list',[TicketClientController::class,'list'])->name('list');
+    Route::name('client.')->group(function (){
+        Route::get('search',[HomeController::class,'search'])->name('search');
+        Route::get('list',[TicketClientController::class,'list'])->name('list');
+        Route::get('detail',[TicketClientController::class,'detail'])->name('detail');
+        Route::get('create',[TicketClientController::class,'create'])->name('create');
+        Route::post('store',[TicketClientController::class,'store'])->name('store');
+    });
 });
 
 Route::middleware('checkLogout')->prefix('/')->name('form.')->group(function (){

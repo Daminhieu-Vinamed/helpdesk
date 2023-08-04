@@ -43,7 +43,13 @@ $(document).ready(function () {
           previous: '<i class="fas fa-chevron-left text-primary"></i>',
           next: '<i class="fas fa-chevron-right text-primary"></i>'
         }
-      }
+      },
+      columnDefs: [{
+        targets: [1, 2, 3, 4],
+        render: function render(data, type, row) {
+          return type === 'display' && data.length > 40 ? data.substr(0, 40) + '…' : data;
+        }
+      }]
     });
     $(document).on('click', '.delete-ticket', function () {
       var id = $(this).attr('id');

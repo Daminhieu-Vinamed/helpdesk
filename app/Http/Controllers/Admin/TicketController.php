@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Ticket\TicketRequest;
+use App\Http\Requests\Ticket\Admin\TicketRequest;
 use App\Services\Admin\TicketService;
 use Illuminate\Http\Request;
 

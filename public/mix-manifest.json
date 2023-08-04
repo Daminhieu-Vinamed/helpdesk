@@ -1,5 +1,5 @@
 {
-    "/js/client/client.js": "/js/client/client.js",
+    "/js/client/ticket.js": "/js/client/ticket.js",
     "/js/admin/client.js": "/js/admin/client.js",
     "/js/admin/ticket.js": "/js/admin/ticket.js",
     "/js/admin/question.js": "/js/admin/question.js",

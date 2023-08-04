@@ -14,6 +14,7 @@
         <link href="{{ asset('dist/css/bootstrap-icons.css') }}" rel="stylesheet">
         <link href="{{ asset('dist/css/templatemo-topic-listing.css') }}" rel="stylesheet">     
         <link href="{{ asset('css/client/add-style.css') }}" rel="stylesheet"> 
+        <link href="{{asset('dist/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     </head>
     <body id="top">
         <main>
@@ -27,5 +28,6 @@
         <script src="{{ asset('dist/js/jquery.sticky.js') }}"></script>
         <script src="{{ asset('dist/js/click-scroll.js') }}"></script>
         <script src="{{ asset('dist/js/custom.js') }}"></script>
+        @stack('js')
     </body>
 </html>

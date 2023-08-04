@@ -1,13 +1,32 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./resources/js/client/client.js":
+/***/ "./resources/js/client/ticket.js":
 /*!***************************************!*\
-  !*** ./resources/js/client/client.js ***!
+  !*** ./resources/js/client/ticket.js ***!
   \***************************************/
 /***/ (() => {
 
-
+$(document).ready(function () {
+  $(document).on('change', '#image', function (e) {
+    var file = e.target.files[0];
+    if ($('.image-display').length == 0) {
+      var grandFatherContent = $('.image-upload').addClass('mb-4');
+      grandFatherContent.append("<button type=\"button\" class=\"btn btn-danger delete-image\"><i class=\"fas fa-trash-alt\"></i></button>\n                                  <img class=\"img-thumbnail image-display\">");
+    }
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = function (event) {
+        $('.image-display').attr('src', event.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  });
+  $(document).on('click', '.delete-image', function () {
+    $('#image').val('');
+    $('.image-upload').remove();
+  });
+});
 
 /***/ }),
 
@@ -123,7 +142,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
-/******/ 			"/js/client/client": 0,
+/******/ 			"/js/client/ticket": 0,
 /******/ 			"css/client/add-style": 0,
 /******/ 			"css/admin/add-style": 0
 /******/ 		};
@@ -175,7 +194,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["css/client/add-style","css/admin/add-style"], () => (__webpack_require__("./resources/js/client/client.js")))
+/******/ 	__webpack_require__.O(undefined, ["css/client/add-style","css/admin/add-style"], () => (__webpack_require__("./resources/js/client/ticket.js")))
 /******/ 	__webpack_require__.O(undefined, ["css/client/add-style","css/admin/add-style"], () => (__webpack_require__("./resources/scss/admin/add-style.scss")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/client/add-style","css/admin/add-style"], () => (__webpack_require__("./resources/scss/client/add-style.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);

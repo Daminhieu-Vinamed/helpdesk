@@ -20,4 +20,19 @@ class Ticket extends Model
         'problem_handler_user_id',
         'is_send_mail',
     ];
+
+    public function userCreate()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function userHandler()
+    {
+        return $this->belongsTo(User::class, 'problem_handler_user_id', 'id');
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class, 'question_id', 'id');
+    }
 }

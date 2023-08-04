@@ -7,7 +7,7 @@
                 <div class="col-lg-8 col-12 mx-auto">
                     <h1 class="text-white text-center">Chào mừng bạn đến với hệ thống Helpdesk</h1>
                     <h6 class="text-center">Hệ thống này thuộc tổng công ty thiết bị y tế Việt Nam VINAMED - CTCP</h6>
-                    <form method="get" action="{{ route('search') }}" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" role="search">
+                    <form method="get" action="{{ route('client.search') }}" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" role="search">
                         <div class="input-group input-group-lg">
                             <span class="input-group-text bi-search" id="basic-addon1"></span>
                             <input name="keyword" type="search" class="form-control" id="keyword" placeholder="Tìm kiếm ticket..." aria-label="Search">
@@ -19,7 +19,7 @@
         </div>
     </section>
     @if (isset($tickets))
-        @if (sizeof($tickets) > 0)
+        @if (sizeof($tickets) > config('constants.number.zero'))
             <section class="featured-section">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -29,8 +29,8 @@
                                     <a href="topics-detail.html">
                                         <div class="d-flex">
                                             <div>
-                                                <h5 class="mb-2">{{$ticket->title}}</h5>
-                                                <p class="mb-0 effects line-clamp">{{$ticket->content}}</p>
+                                                <h5 class="mb-2 effects line-clamp-title-1">{{$ticket->title}}</h5>
+                                                <p class="mb-0 effects {{ !empty($ticket->image) ? 'line-clamp-content' : '' }}">{{$ticket->content}}</p>
                                             </div>
                                         </div>
                                         @if (!empty($ticket->image))

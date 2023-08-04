@@ -24,7 +24,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Ticket</a>
                     <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
-                        <li><a class="dropdown-item" href="topics-listing.html">Danh sách ticket</a></li>
+                        <li><a class="dropdown-item" href="{{ route('client.list') }}">Danh sách ticket</a></li>
 
                         <li><a class="dropdown-item" href="contact.html">Tạo ticket</a></li>
                     </ul>

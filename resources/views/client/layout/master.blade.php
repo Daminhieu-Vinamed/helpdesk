@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <meta name="author" content="">
         <title>@yield('title')</title>
         <!-- CSS FILES -->        
@@ -28,6 +29,8 @@
         <script src="{{ asset('dist/js/jquery.sticky.js') }}"></script>
         <script src="{{ asset('dist/js/click-scroll.js') }}"></script>
         <script src="{{ asset('dist/js/custom.js') }}"></script>
+        <script src="{{ asset('js/client/modal.js') }}"></script>
+        <script src="{{ asset('js/client/client.js') }}"></script>
         @stack('js')
     </body>
 </html>

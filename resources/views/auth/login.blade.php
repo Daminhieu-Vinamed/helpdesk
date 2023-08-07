@@ -21,6 +21,11 @@
                             <input type="password" class="form-control form-control-user"
                                 id="exampleInputPassword" placeholder="Password" name="password">
                         </div>
+                        @if (Session::has('error'))
+                            <div class="validate-input">
+                                <span class="focus-input100 text-center text-danger">{{ Session::get('error') }}</span>
+                            </div>
+					    @endif
                         <div class="form-group">
                             <div class="custom-control custom-checkbox small">
                                 <input type="checkbox" class="custom-control-input" id="customCheck">

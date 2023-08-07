@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\ClientController as ClientAdminController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\TicketController as TicketAdminController;
+use App\Http\Controllers\Client\ClientController as ClientClientController;
 use App\Http\Controllers\Client\TicketController as TicketClientController;
 use App\Http\Controllers\Client\HomeController;
 use App\Http\Controllers\Mail\MailController;
@@ -20,18 +21,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::middleware('checkLogin')->group(function (){
-    Route::prefix('admin')->name('admin.')->group(function (){
+    Route::middleware('checkRole')->prefix('admin')->name('admin.')->group(function (){
         Route::prefix('users')->name('users.')->group(function (){
-            Route::get('/', [ClientController::class, 'layout'])->name('list');
-            Route::get('get-data', [ClientController::class, 'list']);
+            Route::get('/', [ClientAdminController::class, 'layout'])->name('list');
+            Route::get('get-data', [ClientAdminController::class, 'list']);
 
-            Route::get('create', [ClientController::class, 'create'])->name('create');
-            Route::post('store', [ClientController::class, 'store'])->name('store');
+            Route::get('create', [ClientAdminController::class, 'create'])->name('create');
+            Route::post('store', [ClientAdminController::class, 'store'])->name('store');
 
-            Route::get('edit', [ClientController::class, 'edit'])->name('edit');
-            Route::put('update', [ClientController::class, 'update'])->name('update');
+            Route::get('edit', [ClientAdminController::class, 'edit'])->name('edit');
+            Route::put('update', [ClientAdminController::class, 'update'])->name('update');
 
-            Route::delete('delete', [ClientController::class, 'delete'])->name('delete');
+            Route::delete('delete', [ClientAdminController::class, 'delete'])->name('delete');
         });
 
         Route::prefix('tickets')->name('tickets.')->group(function (){
@@ -60,18 +61,22 @@ Route::middleware('checkLogin')->group(function (){
             Route::delete('delete', [QuestionController::class, 'delete'])->name('delete');
         });
 
-        Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-
         Route::prefix('mail')->name('mail.')->group(function (){
             Route::get('send-only-admin', [MailController::class, 'sendOnlyAdmin'])->name('sendOnlyAdmin');
         });
     });
+
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+    
     Route::name('client.')->group(function (){
         Route::get('search',[HomeController::class,'search'])->name('search');
         Route::get('list',[TicketClientController::class,'list'])->name('list');
         Route::get('detail',[TicketClientController::class,'detail'])->name('detail');
         Route::get('create',[TicketClientController::class,'create'])->name('create');
         Route::post('store',[TicketClientController::class,'store'])->name('store');
+        Route::prefix('user')->name('user.')->group(function (){
+            Route::post('update',[ClientClientController::class,'update'])->name('update');
+        });
     });
 });
 

@@ -53,3 +53,26 @@
     margin-bottom: 0;
   }
 }
+
+.btn.btn-logout{
+  background: #FF0000;
+  border: 2px solid transparent;
+  border-radius: 100px;
+  line-height: normal;
+  transition: all 0.3s;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: white;
+}
+
+.btn.btn-logout:hover{
+  background: #770000;
+}
+
+.form-floating{
+  .form-control{
+    border-radius: 100px;
+    padding: 0 20px;
+  }
+}

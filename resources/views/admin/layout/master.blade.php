@@ -98,5 +98,4 @@
     <script src="{{asset('dist/js/sb-admin-2.min.js')}}"></script>
     @stack('js')
 </body>
-
 </html>

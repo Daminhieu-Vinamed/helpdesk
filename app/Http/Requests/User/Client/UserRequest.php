@@ -21,6 +21,14 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
+        if ($this->password === config('constants.value.null') || $this->password !== "undefined") {
+            $password = 'required|max:255';
+            $againPassword = 'required_with:password|same:password|max:255';
+        } else {
+            $password = 'nullable|max:255';
+            $againPassword = 'nullable|max:255';
+        }
+         
         return [
             'employee_code' => 'required|max:255|unique:users,employee_code,'.$this->id,
             'username' => 'nullable|max:255|unique:users,username,'.$this->id,
@@ -28,7 +36,8 @@ class UserRequest extends FormRequest
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'full_name' => 'required|max:255',
-            'password' => 'nullable|max:255',
+            'password' => $password,
+            'againPassword' => $againPassword,
         ];
     }
 
@@ -57,6 +66,11 @@ class UserRequest extends FormRequest
             'full_name.required' => 'Họ và tên không được để trống',
 
             'password.max' => 'Mật khẩu tối đa 255 ký tự',
+            'password.required' => 'Mật khẩu không được để trống',
+            
+            'againPassword.required_with' => 'Mật khẩu nhập lại không được để trống',
+            'againPassword.same' => 'Mật khẩu nhập lại phải giống mật khẩu',
+            'againPassword.max' => 'Mật khẩu nhập lại tối đa 255 ký tự',
         ];
     }
 }

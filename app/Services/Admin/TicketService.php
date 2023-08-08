@@ -89,6 +89,8 @@ class TicketService
 
     public function delete($request)
     {
+        $ticket = $this->ticketRepository->edit($request->id);
+        Storage::delete(str_replace("storage", "public", $ticket->image));
         return $this->ticketRepository->destroy($request);
     }
 }

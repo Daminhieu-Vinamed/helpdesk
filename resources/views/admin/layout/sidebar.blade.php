@@ -13,7 +13,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link {{request()->routeIs('admin.dashboard') ? '' : 'collapsed'}}" href="{{ route('admin.dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -34,7 +34,9 @@
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Chọn mục:</h6>
                 <a class="collapse-item {{ request()->routeIs('admin.users.list') || request()->routeIs('admin.users.edit') ? 'block' : '' }}" href="{{ route('admin.users.list') }}">Danh sách</a>
-                <a class="collapse-item {{ request()->routeIs('admin.users.create') ? 'block' : '' }}" href="{{ route('admin.users.create') }}">Thêm mới</a>
+                @if (Auth::user()->role === config('constants.role.three'))
+                    <a class="collapse-item {{ request()->routeIs('admin.users.create') ? 'block' : '' }}" href="{{ route('admin.users.create') }}">Thêm mới</a>
+                @endif
             </div>
         </div>
     </li>

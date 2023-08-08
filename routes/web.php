@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\TicketController as TicketAdminController;
 use App\Http\Controllers\Client\ClientController as ClientClientController;
 use App\Http\Controllers\Client\TicketController as TicketClientController;
 use App\Http\Controllers\Client\HomeController;
+use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Mail\MailController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,17 +23,23 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware('checkLogin')->group(function (){
     Route::middleware('checkRole')->prefix('admin')->name('admin.')->group(function (){
+        Route::prefix('dashboard')->group(function (){
+            Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+            Route::get('statistical', [DashboardController::class, 'statistical']);
+        });
+
         Route::prefix('users')->name('users.')->group(function (){
             Route::get('/', [ClientAdminController::class, 'layout'])->name('list');
             Route::get('get-data', [ClientAdminController::class, 'list']);
+            Route::middleware('checkRoleSuperAdmin')->group(function (){
+                Route::get('create', [ClientAdminController::class, 'create'])->name('create');
+                Route::post('store', [ClientAdminController::class, 'store'])->name('store');
 
-            Route::get('create', [ClientAdminController::class, 'create'])->name('create');
-            Route::post('store', [ClientAdminController::class, 'store'])->name('store');
+                Route::get('edit', [ClientAdminController::class, 'edit'])->name('edit');
+                Route::put('update', [ClientAdminController::class, 'update'])->name('update');
 
-            Route::get('edit', [ClientAdminController::class, 'edit'])->name('edit');
-            Route::put('update', [ClientAdminController::class, 'update'])->name('update');
-
-            Route::delete('delete', [ClientAdminController::class, 'delete'])->name('delete');
+                Route::delete('delete', [ClientAdminController::class, 'delete'])->name('delete');
+            });
         });
 
         Route::prefix('tickets')->name('tickets.')->group(function (){
@@ -89,3 +96,5 @@ Route::middleware('checkLogout')->prefix('/')->name('form.')->group(function (){
 });
 
 Route::get('/',[HomeController::class,'layout'])->name('home');
+
+Route::get('/active-user',[AuthController::class,'activeUser'])->name('activeUser');

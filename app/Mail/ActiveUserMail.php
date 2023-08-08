@@ -9,17 +9,16 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class TicketMail extends Mailable
+class ActiveUserMail extends Mailable
 {
     use Queueable, SerializesModels;
-
-    public $mailData;
+    public $id;
     /**
      * Create a new message instance.
      */
-    public function __construct($mailData)
+    public function __construct($id)
     {
-        $this->mailData = $mailData;
+        $this->id = $id;
     }
 
     /**
@@ -28,7 +27,7 @@ class TicketMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Thư từ hệ thống Helpdesk Vinamed',
+            subject: 'Kích hoạt tài khoản hệ thống Helpdesk',
         );
     }
 
@@ -38,7 +37,7 @@ class TicketMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.ticket-mail',
+            view: 'mail.active-user-mail',
         );
     }
 

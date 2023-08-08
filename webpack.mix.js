@@ -7,4 +7,5 @@ mix.js('resources/js/client/ticket.js', 'public/js/client/')
     .js('resources/js/admin/client.js', 'public/js/admin/')
     .js('resources/js/admin/ticket.js', 'public/js/admin/')
     .js('resources/js/admin/question.js', 'public/js/admin/')
+    .js('resources/js/admin/dashboard.js', 'public/js/admin/')
     .setPublicPath('public');

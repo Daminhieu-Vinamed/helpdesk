@@ -8,30 +8,34 @@
             <div class="col-lg-6">
                 <div class="p-5">
                     <div class="text-center">
-                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                        <h1 class="h4 text-gray-900 mb-4">Đăng nhập</h1>
                     </div>
                     <form class="user" action="{{ route('form.postLogin') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <input type="text" class="form-control form-control-user"
                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                placeholder="Enter Email Address..." name="email">
+                                placeholder="Điền địa chỉ E-mail..." name="email">
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control form-control-user"
-                                id="exampleInputPassword" placeholder="Password" name="password">
+                                id="exampleInputPassword" placeholder="Mật khẩu" name="password">
                         </div>
                         @if (Session::has('error'))
-                            <div class="validate-input">
+                            <div class="form-group">
                                 <span class="focus-input100 text-center text-danger">{{ Session::get('error') }}</span>
                             </div>
+                        @elseif (Session::has('success'))
+                            <div class="form-group">
+                                <span class="focus-input100 text-center text-success">{{ Session::get('success') }}</span>
+                            </div>
 					    @endif
-                        <div class="form-group">
+                        {{-- <div class="form-group">
                             <div class="custom-control custom-checkbox small">
                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                 <label class="custom-control-label" for="customCheck">Remember Me</label>
                             </div>
-                        </div>
+                        </div> --}}
                         <button type="submit" class="btn btn-primary btn-user btn-block">Đăng nhập</button>
                         {{-- <hr>
                         <a href="index.html" class="btn btn-google btn-user btn-block">
@@ -43,10 +47,10 @@
                     </form>
                     <hr>
                     <div class="text-center">
-                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                        <a class="small" href="forgot-password.html">Lấy lại mật khẩu?</a>
                     </div>
                     <div class="text-center">
-                        <a class="small" href="{{ route('form.getRegister') }}">Create an Account!</a>
+                        <a class="small" href="{{ route('form.getRegister') }}">Tạo tài khoản!</a>
                     </div>
                 </div>
             </div>

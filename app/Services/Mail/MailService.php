@@ -19,8 +19,10 @@ class MailService
             'question' => $ticket->question,
             'title' => $ticket->title,
             'content' => $ticket->content,
-            'image' => $ticket->image,
         ];
+        if ($ticket->image !== config('constants.value.null')) {
+            $mailData['image'] = $ticket->image;
+        }
         $this->ticketRepository->updateTicket($id, ['is_send_mail' => config('constants.status.two')]);
         return Mail::to($ticket->email)->send(new TicketMail($mailData));
     }

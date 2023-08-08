@@ -15,7 +15,6 @@ $(document).ready(function () {
                 { data: 'status', name: 'status' },
                 { data: 'action', name: 'action' },
             ],
-            retrieve: true,
             language: {
                 emptyTable: 'Danh sách hiện tại đang trống',
                 info: "Đang hiển thị mục _PAGE_ trên tổng _PAGES_ mục",
@@ -27,9 +26,9 @@ $(document).ready(function () {
                 },
             },
             columnDefs: [{
-                targets: [1,2,3,4],
+                targets: [1, 2],
                 render: function (data, type, row) {
-                    return type === 'display' && data.length > 40 ? data.substr(0, 40) + '…' : data;
+                    return type === 'display' && data.length > 32 ? data.substr(0, 32) + '…' : data;
                 }
             }]
         });

@@ -4,6 +4,7 @@ namespace App\Repositories\Admin;
 
 use App\Models\User;
 use App\Repositories\AbstractRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -34,7 +35,11 @@ class ClientRepository extends AbstractRepository
             }
         })
         ->addColumn('action', function($arrUser){
-           return ' <a href="'.route('admin.users.edit', ['id' => $arrUser['id']]).'" class="btn btn-success"><i class="fas fa-edit"></i></a> ' . ' <button id="'.$arrUser['id'].'" class="btn btn-danger delete-user"><i class="fas fa-trash-alt"></i></button> ';
+            if (Auth::user()->role === config('constants.role.three')) {
+                return ' <a href="'.route('admin.users.edit', ['id' => $arrUser['id']]).'" class="btn btn-success"><i class="fas fa-edit"></i></a> ' . ' <button id="'.$arrUser['id'].'" class="btn btn-danger delete-user"><i class="fas fa-trash-alt"></i></button> ';
+            }else{
+                return 'Trống';
+            }
         })
         ->make(true);
     }

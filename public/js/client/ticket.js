@@ -10,21 +10,21 @@
 $(document).ready(function () {
   $(document).on('change', '#image', function (e) {
     var file = e.target.files[0];
-    if ($('.image-display').length == 0) {
-      var grandFatherContent = $('.image-upload').addClass('mb-4');
-      grandFatherContent.append("<button type=\"button\" class=\"btn btn-danger delete-image\"><i class=\"fas fa-trash-alt\"></i></button>\n                                  <img class=\"img-thumbnail image-display\">");
+    if ($('.image-display-create-ticket-client').length === 0) {
+      var grandFatherImage = $('.image-upload-create-ticket-client').addClass('mb-4');
+      grandFatherImage.append("<button type=\"button\" class=\"btn btn-danger delete-image-create-ticket-client\">\n                                                      <i class=\"fas fa-trash-alt\"></i>\n                                                      </button>\n                                                      <img class=\"img-thumbnail image-display-create-ticket-client\">");
     }
     if (file) {
       var reader = new FileReader();
       reader.onload = function (event) {
-        $('.image-display').attr('src', event.target.result);
+        $('.image-display-create-ticket-client').attr('src', event.target.result);
       };
       reader.readAsDataURL(file);
     }
   });
-  $(document).on('click', '.delete-image', function () {
+  $(document).on('click', '.delete-image-create-ticket-client', function () {
     $('#image').val('');
-    $('.image-upload').remove();
+    $('.image-upload-create-ticket-client').empty();
   });
 });
 

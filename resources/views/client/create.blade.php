@@ -62,7 +62,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="col-lg-12 col-12 image-upload"></div>
+                        <div class="col-lg-12 col-12 image-upload-create-ticket-client"></div>
                         <div class="col-lg-4 col-12 ms-auto">
                             <button type="submit" class="form-control">Gửi</button>
                         </div>

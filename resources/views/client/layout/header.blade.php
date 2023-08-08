@@ -60,122 +60,125 @@
         </div>
     </div>
 </nav>
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Thông tin cá nhân</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+@if (Auth::check())
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Thông tin cá nhân</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body row">
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="hidden" name="id" value="{{Auth::user()->id}}">
+                        <input type="text" name="employee_code" class="form-control" value="{{Auth::user()->employee_code}}" @disabled(true)>
+                        <label for="floatingInput">Mã nhân viên</label>
+                        <span class="text-danger employee_code-error"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="first_name" class="form-control" value="{{Auth::user()->first_name}}">
+                        <label for="floatingInput">Họ</label>
+                        <span class="text-danger first_name-error"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="last_name" class="form-control" value="{{Auth::user()->last_name}}">
+                        <label for="floatingInput">Tên</label>
+                        <span class="text-danger last_name-error"></span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="full_name" class="form-control" value="{{Auth::user()->full_name}}">
+                        <label for="floatingInput">Họ và tên</label>
+                        <span class="text-danger full_name-error"></span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="username" class="form-control" value="{{Auth::user()->username}}">
+                        <label for="floatingInput">Tên tài khoản</label>
+                        <span class="text-danger username-error"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="date" name="birthday" class="form-control" value="{{date('Y-m-d', strtotime(Auth::user()->birthday))}}">
+                        <label for="floatingInput">Ngày sinh</label>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="apartment_number" class="form-control" value="{{Auth::user()->apartment_number}}">
+                        <label for="floatingInput">Số nhà</label>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="village" class="form-control" value="{{Auth::user()->village}}">
+                        <label for="floatingInput">Đường/Phố/Làng</label>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="wards" class="form-control" value="{{Auth::user()->wards}}">
+                        <label for="floatingInput">Phường/Xã</label>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="district" class="form-control" value="{{Auth::user()->district}}">
+                        <label for="floatingInput">Quận/Huyện</label>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="city" class="form-control" value="{{Auth::user()->city}}">
+                        <label for="floatingInput">Thành Phố</label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="hidden" name="imageBefore" value="{{Auth::user()->avatar}}">
+                        <input type="file" name="avatar" id="avatar" class="form-control">
+                        <label for="floatingInput">Ảnh đại diện</label>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="phone" class="form-control" value="{{Auth::user()->phone}}">
+                        <label for="floatingInput">Số điện thoại</label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}">
+                        <label for="floatingInput">E-mail</label>
+                        <span class="text-danger email-error"></span>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <button class="btn btn-change-password">Đổi mật khẩu</button>
+                    </div>
+                </div>
+                <div class="enter-again-password"> </div>
+                @if (Auth::user()->avatar !== config('constants.value.null'))
+                    <div class="col-lg-4 col-md-6 col-12 image-upload-update-user-client">
+                        <button type="button" class="btn btn-danger delete-image-update-user-client"><i class="fas fa-trash-alt"></i></button>
+                        <img class="img-thumbnail image-display-update-user-client" src="{{ asset(Auth::user()->avatar) }}">
+                    </div>
+                @endif
+            </div>
+            <div class="modal-footer">
+                <a href="{{ route('logout') }}" class="btn btn-logout">Đăng xuất</a>
+                <button type="button" class="custom-btn update-user-client">Cập nhật</button>
+            </div>
         </div>
-        <div class="modal-body row">
-            <div class="col-lg-2 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="hidden" name="id" value="{{Auth::user()->id}}">
-                    <input type="text" name="employee_code" class="form-control" value="{{Auth::user()->employee_code}}" @disabled(true)>
-                    <label for="floatingInput">Mã nhân viên</label>
-                    <span class="text-danger employee_code-error"></span>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="text" name="first_name" class="form-control" value="{{Auth::user()->first_name}}">
-                    <label for="floatingInput">Họ</label>
-                    <span class="text-danger first_name-error"></span>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="text" name="last_name" class="form-control" value="{{Auth::user()->last_name}}">
-                    <label for="floatingInput">Tên</label>
-                    <span class="text-danger last_name-error"></span>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="text" name="full_name" class="form-control" value="{{Auth::user()->full_name}}">
-                    <label for="floatingInput">Họ và tên</label>
-                    <span class="text-danger full_name-error"></span>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="text" name="username" class="form-control" value="{{Auth::user()->username}}">
-                    <label for="floatingInput">Tên tài khoản</label>
-                    <span class="text-danger username-error"></span>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="date" name="birthday" class="form-control" value="{{date('Y-m-d', strtotime(Auth::user()->birthday))}}">
-                    <label for="floatingInput">Ngày sinh</label>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="text" name="apartment_number" class="form-control" value="{{Auth::user()->apartment_number}}">
-                    <label for="floatingInput">Số nhà</label>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="text" name="village" class="form-control" value="{{Auth::user()->village}}">
-                    <label for="floatingInput">Đường/Phố/Làng</label>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="text" name="wards" class="form-control" value="{{Auth::user()->wards}}">
-                    <label for="floatingInput">Phường/Xã</label>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="text" name="district" class="form-control" value="{{Auth::user()->district}}">
-                    <label for="floatingInput">Quận/Huyện</label>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="text" name="city" class="form-control" value="{{Auth::user()->city}}">
-                    <label for="floatingInput">Thành Phố</label>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="hidden" name="imageBefore" value="{{Auth::user()->avatar}}">
-                    <input type="file" name="avatar" id="avatar" class="form-control">
-                    <label for="floatingInput">Ảnh đại diện</label>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="text" name="phone" class="form-control" value="{{Auth::user()->phone}}">
-                    <label for="floatingInput">Số điện thoại</label>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}">
-                    <label for="floatingInput">E-mail</label>
-                    <span class="text-danger email-error"></span>
-                </div>
-            </div>
-            <div class="col-lg-2 col-md-6 col-12"> 
-                <div class="form-floating">
-                    <input type="password" name="password" class="form-control">
-                    <label for="floatingInput">Mật khẩu</label>
-                    <span class="text-danger password-error"></span>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-12 image-upload">
-                <button type="button" class="btn btn-danger delete-image"><i class="fas fa-trash-alt"></i></button>
-                <img class="img-thumbnail image-display" src="{{ asset(Auth::user()->avatar) }}">
-            </div>
         </div>
-        <div class="modal-footer">
-            <a href="{{ route('logout') }}" class="btn btn-logout">Đăng xuất</a>
-            <button type="button" class="custom-btn update-user-client">Cập nhật</button>
-        </div>
-      </div>
     </div>
-</div>
+@endif

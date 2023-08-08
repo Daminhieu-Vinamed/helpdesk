@@ -24,6 +24,7 @@ $(document).ready(function () {
     formData.append('phone', $('input[name="phone"]').val());
     formData.append('email', $('input[name="email"]').val());
     formData.append('password', $('input[name="password"]').val());
+    formData.append('againPassword', $('input[name="againPassword"]').val());
     $.ajax({
       url: baseUrl + "/user/update",
       type: 'POST',
@@ -45,6 +46,7 @@ $(document).ready(function () {
         error.last_name ? $('.last_name-error').text(error.last_name[0]) : $('.last_name-error').text('');
         error.full_name ? $('.full_name-error').text(error.full_name[0]) : $('.full_name-error').text('');
         error.password ? $('.password-error').text(error.password[0]) : $('.password-error').text('');
+        error.againPassword ? $('.again-password-error').text(error.againPassword[0]) : $('.again-password-error').text('');
       }
     });
   });

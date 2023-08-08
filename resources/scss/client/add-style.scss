@@ -30,14 +30,25 @@
   overflow: hidden;
 }
 
-.image-upload{
-  .delete-image{
-      margin: 10px 0 0 10px;
-      position: absolute;
-      z-index: 999;
+.image-upload-update-user-client{
+  .delete-image-update-user-client{
+    margin: 10px 0 0 10px;
+    position: absolute;
+    z-index: 999;
   }
-  .image-display{
-      position: relative;
+  .image-display-update-user-client{
+    position: relative;
+  }
+}
+
+.image-upload-create-ticket-client{
+  .delete-image-create-ticket-client{
+    margin: 10px 0 0 10px;
+    position: absolute;
+    z-index: 999;
+  }
+  .image-display-create-ticket-client{
+    position: relative;
   }
 }
 
@@ -68,6 +79,22 @@
 
 .btn.btn-logout:hover{
   background: #770000;
+}
+
+.btn.btn-change-password{
+    background: #c2c2c2;
+    border: 2px solid transparent;
+    border-radius: 100px;
+    line-height: normal;
+    transition: all 0.3s;
+    padding: 15px 23px;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+.btn.btn-logout:hover{
+  background: #d2d2d2;
 }
 
 .form-floating{

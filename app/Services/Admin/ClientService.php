@@ -42,11 +42,11 @@ class ClientService
     public function update($request)
     {
         $dataUserEdit = $request->input();
-        $ticket = $this->clientRepository->edit($dataUserEdit['id']);
+        $user = $this->clientRepository->edit($dataUserEdit['id']);
         if (empty($request->file('avatar'))) {
             if (empty($dataUserEdit['imageBefore'])) {
-                if (!empty($ticket->avatar)) {
-                    Storage::delete(str_replace("storage", "public", $ticket->avatar));
+                if (!empty($user->avatar)) {
+                    Storage::delete(str_replace("storage", "public", $user->avatar));
                 }
                 $dataUserEdit['avatar'] = config('constants.value.null');
             }else{
@@ -56,8 +56,8 @@ class ClientService
             $imageName = $request->file('avatar')->hashName();
             $dataUserEdit['avatar'] = $this->imagePath . $imageName;
             $request->avatar->storeAs($this->storePath, $imageName);
-            if (!empty($ticket->avatar)) {
-                Storage::delete(str_replace("storage", "public", $ticket->avatar));
+            if (!empty($user->avatar)) {
+                Storage::delete(str_replace("storage", "public", $user->avatar));
             }
         }
         $dataUserEdit['password'] = Hash::make($request->password);
@@ -66,6 +66,8 @@ class ClientService
 
     public function delete($request)
     {
+        $user = $this->clientRepository->edit($request->id);
+        Storage::delete(str_replace("storage", "public", $user->avatar));
         return $this->clientRepository->destroy($request);
     }
 }

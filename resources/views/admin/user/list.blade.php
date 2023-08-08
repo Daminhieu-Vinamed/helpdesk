@@ -13,7 +13,9 @@
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary float-left">Danh sách người dùng</h6>
-                <a href="{{ route('admin.users.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus-square"></i></a>
+                @if (Auth::user()->role === config('constants.role.three'))
+                    <a href="{{ route('admin.users.create') }}" class="btn btn-primary float-right"><i class="fas fa-plus-square"></i></a>
+                @endif
             </div>
             <div class="card-body">
                 <div class="table-responsive">

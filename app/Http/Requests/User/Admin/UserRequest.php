@@ -33,7 +33,7 @@ class UserRequest extends FormRequest
                 $email = 'required|max:255|email|unique:users,email,'.$this->id;
                 $employee_code = 'required|max:255|unique:users,employee_code,'.$this->id;
                 $username = 'nullable|max:255|unique:users,username,'.$this->id;
-                $password = 'nullable|max:255';
+                $password = array_key_exists('password', $this->input()) ? 'required|max:255' : 'nullable|max:255';
                 break;
         }
         return [

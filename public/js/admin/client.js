@@ -87,6 +87,10 @@ $(document).ready(function () {
       }
       $('.image-upload').remove();
     });
+    $(document).on('click', '.edit-password', function () {
+      $(this).remove();
+      $('.update-password').append("<input type=\"password\" class=\"form-control\" id=\"examplePassword\" name=\"password\">");
+    });
   }
 });
 /******/ })()

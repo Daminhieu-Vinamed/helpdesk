@@ -114,9 +114,9 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <div class="col-sm-4 mb-3 mb-sm-0 update-password">
                                         <label for="examplePassword">Mật khẩu</label>
-                                        <input type="password" class="form-control" id="examplePassword" name="password">
+                                        <button type="button" class="btn btn-primary btn-block edit-password">Đổi mật khẩu</button>
                                         @error('password')
                                             <span class="text-danger">{{$message}}</span>
                                         @enderror

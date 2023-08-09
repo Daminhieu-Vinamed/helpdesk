@@ -25,25 +25,31 @@
 <section class="section-padding section-bg">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-12 text-center">
-                <h3 class="mb-4">Danh sách ticket bạn đã tạo</h3>
-            </div>
-            @foreach ($tickets as $ticket)
-                <div class="col-lg-8 col-12 mt-3 mx-auto">
-                    <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5">
-                        <div class="d-flex">
-                            <div class="custom-block-topics-listing-info d-flex">
-                                <div>
-                                    <h5 class="mb-2 line-clamp-title-1">{{$ticket->title}}</h5>
-                                    <p class="mb-0">Người xử lý: {{ !empty($ticket->username) ? $ticket->username : $ticket->email }}</p>
-                                    <p class="mb-0">Trạng thái: @if ($ticket->status === config('constants.status.one')) Chưa xử lý @elseif ($ticket->status === config('constants.status.two')) Đang xử lý @else Đã xử lý @endif</p>
-                                    <a href="{{ route('client.detail', ['id' => $ticket->id]) }}" class="btn custom-btn mt-3 mt-lg-4">Chi tiết</a>
+            @if ($tickets[config('constants.number.zero')] === config('constants.value.null'))
+                <div class="col-lg-12 col-12 text-center">
+                    <h3 class="mb-4">Danh sách ticket bạn đang trống</h3>
+                </div>
+            @else
+                <div class="col-lg-12 col-12 text-center">
+                    <h3 class="mb-4">Danh sách ticket bạn đã tạo</h3>
+                </div>
+                @foreach ($tickets as $ticket)
+                    <div class="col-lg-8 col-12 mt-3 mx-auto">
+                        <div class="custom-block custom-block-topics-listing bg-white shadow-lg mb-5">
+                            <div class="d-flex">
+                                <div class="custom-block-topics-listing-info d-flex">
+                                    <div>
+                                        <h5 class="mb-2 line-clamp-title-1">{{$ticket->title}}</h5>
+                                        <p class="mb-0">Người xử lý: {{ !empty($ticket->username) ? $ticket->username : $ticket->email }}</p>
+                                        <p class="mb-0">Trạng thái: @if ($ticket->status === config('constants.status.one')) Chưa xử lý @elseif ($ticket->status === config('constants.status.two')) Đang xử lý @else Đã xử lý @endif</p>
+                                        <a href="{{ route('client.detail', ['id' => $ticket->id]) }}" class="btn custom-btn mt-3 mt-lg-4">Chi tiết</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            @endif
             <div class="col-lg-12 col-12">
                 {{$tickets->links('client.layout.paginate')}}
             </div>

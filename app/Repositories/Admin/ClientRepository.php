@@ -17,7 +17,8 @@ class ClientRepository extends AbstractRepository
 
     public function list() 
     {
-        $users = $this->all();
+        $users = $this->builder();
+        Auth::user()->role === config('constants.role.three') ? $users->where('id', '<>', Auth::user()->id)->get() : $users->get();
         return DataTables::of($users)->addColumn('role', function($arrUser){
             if ($arrUser['role'] === config('constants.status.one')) {
                 return "Người dùng";

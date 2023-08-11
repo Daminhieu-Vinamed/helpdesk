@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserRequest extends FormRequest
 {
@@ -21,31 +22,15 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        switch ($this->method())
-        {
-            case 'POST':
-                $email = 'required|max:255|email|unique:users,email';
-                $employee_code = 'required|max:255|unique:users,employee_code';
-                $username = 'nullable|max:255|unique:users,username';
-                $password = 'required|max:255';
-                break;
-            case 'PUT':
-                $email = 'required|max:255|email|unique:users,email,'.$this->id;
-                $employee_code = 'required|max:255|unique:users,employee_code,'.$this->id;
-                $username = 'nullable|max:255|unique:users,username,'.$this->id;
-                $password = array_key_exists('password', $this->input()) ? 'required|max:255' : 'nullable|max:255';
-                break;
-        }
         return [
-            'employee_code' => $employee_code,
-            'username' => $username,
-            'email' => $email,
+            'employee_code' => 'required|max:255|unique:users,employee_code,'.Auth::user()->id,
+            'username' => 'nullable|max:255|unique:users,username,'.Auth::user()->id,
+            'email' => 'required|max:255|email|unique:users,email,'.Auth::user()->id,
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'full_name' => 'required|max:255',
-            'role' => 'required',
-            'status' => 'required',
-            'password' => $password
+            'role' => 'required|max:11',
+            'status' => 'required|max:11',
         ];
     }
 
@@ -73,11 +58,9 @@ class UserRequest extends FormRequest
             'full_name.max' => 'Họ và tên tối đa 255 ký tự',
             'full_name.required' => 'Họ và tên không được để trống',
 
-            'role.required' => 'Vai trò không được để trống',
+            'role.required' => 'Quyền hạn không được để trống',
+            
             'status.required' => 'Trạng thái không được để trống',
-
-            'password.max' => 'Mật khẩu tối đa 255 ký tự',
-            'password.required' => 'Mật khẩu không được để trống',
         ];
     }
 }

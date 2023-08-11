@@ -122,7 +122,7 @@
                                         @enderror
                                     </div>
                                     <div class="col-sm-4 mb-3 mb-sm-0">
-                                        <input type="hidden" name="imageBefore" value="{{$user->avatar}}">
+                                        <input type="hidden" class="imageBeforeCreateUser" name="imageBefore" value="{{$user->avatar}}">
                                         <label for="exampleAvatar">hình đại diện</label>
                                         <input type="file" class="form-control" id="exampleAvatar" name="avatar">
                                     </div>

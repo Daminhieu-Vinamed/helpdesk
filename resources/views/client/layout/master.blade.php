@@ -23,14 +23,12 @@
             @yield('content')
         </main>
         @include('client.layout.footer')
-        <!-- JAVASCRIPT FILES -->
         <script src="{{ asset('dist/js/jquery.min.js') }}"></script>
         <script src="{{ asset('dist/js/bootstrap.bundle.min.js') }}"></script>
         <script src="{{ asset('dist/js/jquery.sticky.js') }}"></script>
         <script src="{{ asset('dist/js/click-scroll.js') }}"></script>
         <script src="{{ asset('dist/js/custom.js') }}"></script>
-        <script src="{{ asset('js/client/modal.js') }}"></script>
-        <script src="{{ asset('js/client/client.js') }}"></script>
+        <script src="{{ asset('js/client/modal-profile.js') }}"></script>
         @stack('js')
     </body>
 </html>

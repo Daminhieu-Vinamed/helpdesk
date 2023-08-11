@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User\Client;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class UserRequest extends FormRequest
 {
@@ -21,23 +22,13 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        if ($this->password === config('constants.value.null') || $this->password !== "undefined") {
-            $password = 'required|max:255';
-            $againPassword = 'required_with:password|same:password|max:255';
-        } else {
-            $password = 'nullable|max:255';
-            $againPassword = 'nullable|max:255';
-        }
-         
         return [
-            'employee_code' => 'required|max:255|unique:users,employee_code,'.$this->id,
-            'username' => 'nullable|max:255|unique:users,username,'.$this->id,
-            'email' => 'required|max:255|email|unique:users,email,'.$this->id,
+            'employee_code' => 'required|max:255|unique:users,employee_code,'.Auth::user()->id,
+            'username' => 'nullable|max:255|unique:users,username,'.Auth::user()->id,
+            'email' => 'required|max:255|email|unique:users,email,'.Auth::user()->id,
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'full_name' => 'required|max:255',
-            'password' => $password,
-            'againPassword' => $againPassword,
         ];
     }
 
@@ -64,13 +55,6 @@ class UserRequest extends FormRequest
 
             'full_name.max' => 'Họ và tên tối đa 255 ký tự',
             'full_name.required' => 'Họ và tên không được để trống',
-
-            'password.max' => 'Mật khẩu tối đa 255 ký tự',
-            'password.required' => 'Mật khẩu không được để trống',
-            
-            'againPassword.required_with' => 'Mật khẩu nhập lại không được để trống',
-            'againPassword.same' => 'Mật khẩu nhập lại phải giống mật khẩu',
-            'againPassword.max' => 'Mật khẩu nhập lại tối đa 255 ký tự',
         ];
     }
 }

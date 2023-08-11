@@ -23,6 +23,11 @@ use Illuminate\Support\Facades\Route;
 */
 Route::middleware('checkLogin')->group(function (){
     Route::middleware('checkRole')->prefix('admin')->name('admin.')->group(function (){
+        Route::prefix('profile')->group(function (){
+            Route::post('update',[ClientAdminController::class,'updateProfile']);
+            Route::post('change-password',[ClientAdminController::class,'changePassword']);
+        });
+
         Route::prefix('dashboard')->group(function (){
             Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
             Route::get('statistical', [DashboardController::class, 'statistical']);
@@ -81,8 +86,9 @@ Route::middleware('checkLogin')->group(function (){
         Route::get('detail',[TicketClientController::class,'detail'])->name('detail');
         Route::get('create',[TicketClientController::class,'create'])->name('create');
         Route::post('store',[TicketClientController::class,'store'])->name('store');
-        Route::prefix('user')->name('user.')->group(function (){
-            Route::post('update',[ClientClientController::class,'update'])->name('update');
+        Route::prefix('user')->group(function (){
+            Route::post('update-profile',[ClientClientController::class,'updateProfile']);
+            Route::post('change-password',[ClientClientController::class,'changePassword']);
         });
     });
 });

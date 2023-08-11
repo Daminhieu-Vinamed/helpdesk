@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\Client\UserRequest;
-use App\Services\Admin\ClientService;
+use App\Http\Requests\User\PasswordRequest;
+use App\Services\Client\ClientService;
 
 class ClientController extends Controller
 {
@@ -15,7 +16,11 @@ class ClientController extends Controller
         $this->clientService = $clientService;
     }
     
-    public function update(UserRequest $request) {
-        return $this->clientService->update($request);
+    public function updateProfile(UserRequest $request) {
+        return $this->clientService->updateProfile($request);
+    }
+
+    public function changePassword(PasswordRequest $request) {
+        return $this->clientService->changePassword($request);
     }
 }

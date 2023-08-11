@@ -66,8 +66,8 @@ $(document).ready(function () {
         });
         $(document).on('click', '.delete-image', function () {
             $('#exampleAvatar').val('');
-            if ($('input[name="imageBefore"]').length > 0) {
-                $('input[name="imageBefore"]').val('');
+            if ($('.imageBeforeCreateUser').length > 0) {
+                $('.imageBeforeCreateUser').val('');
             }
             $('.image-upload').remove();
         });

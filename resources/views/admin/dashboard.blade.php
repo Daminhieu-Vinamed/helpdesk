@@ -73,12 +73,12 @@
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Câu hỏi</div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$countData['questionCount']}}%</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{$countData['questionCount']}}</div>
                                 </div>
                                 <div class="col">
                                     <div class="progress progress-sm mr-2">
                                         <div class="progress-bar bg-info" role="progressbar"
-                                            style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                            style="width: {{$countData['questionCount']}}%" aria-valuenow="50" aria-valuemin="0"
                                             aria-valuemax="100"></div>
                                     </div>
                                 </div>
@@ -134,7 +134,7 @@
                 <!-- Card Header - Dropdown -->
                 <div
                     class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Top 3 câu hỏi được dùng nhiều nhất</h6>
                     <div class="dropdown no-arrow">
                         <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -156,15 +156,9 @@
                         <canvas id="myPieChart"></canvas>
                     </div>
                     <div class="mt-4 text-center small">
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-primary"></i> Direct
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-success"></i> Social
-                        </span>
-                        <span class="mr-2">
-                            <i class="fas fa-circle text-info"></i> Referral
-                        </span>
+                        <span class="mr-2 question-primary"></span>
+                        <span class="mr-2 question-success"></span>
+                        <span class="mr-2 question-info"></span>
                     </div>
                 </div>
             </div>
@@ -223,5 +217,4 @@
 @push('js')
     <script src="{{ asset('dist/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('js/admin/dashboard.js') }}" type="text/javascript"></script>
-    <script src="{{ asset('dist/js/demo/chart-pie-demo.js') }}"></script>
 @endpush

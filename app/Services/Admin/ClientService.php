@@ -2,6 +2,7 @@
 namespace App\Services\Admin;
 
 use App\Repositories\Admin\ClientRepository;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
@@ -60,7 +61,9 @@ class ClientService
                 Storage::delete(str_replace("storage", "public", $user->avatar));
             }
         }
-        $dataUserEdit['password'] = Hash::make($request->password);
+        if (array_key_exists('password', $dataUserEdit)) {
+            $dataUserEdit['password'] = Hash::make($request->password);
+        }
         return $this->clientRepository->updateUser($request->id, $dataUserEdit);
     }
 
@@ -69,5 +72,35 @@ class ClientService
         $user = $this->clientRepository->edit($request->id);
         Storage::delete(str_replace("storage", "public", $user->avatar));
         return $this->clientRepository->destroy($request);
+    }
+
+    public function updateProfile($request)
+    {
+        $dataUserEdit = $request->input();
+        $user = $this->clientRepository->edit(Auth::user()->id);
+        if (empty($request->file('avatar'))) {
+            if (empty($dataUserEdit['imageBefore'])) {
+                if (!empty($user->avatar)) {
+                    Storage::delete(str_replace("storage", "public", $user->avatar));
+                }
+                $dataUserEdit['avatar'] = config('constants.value.null');
+            }else{
+                $dataUserEdit['avatar'] = $dataUserEdit['imageBefore'];
+            }
+        }else{
+            $imageName = $request->file('avatar')->hashName();
+            $dataUserEdit['avatar'] = $this->imagePath . $imageName;
+            $request->avatar->storeAs($this->storePath, $imageName);
+            if (!empty($user->avatar)) {
+                Storage::delete(str_replace("storage", "public", $user->avatar));
+            }
+        }
+        return $this->clientRepository->updateUser(Auth::user()->id, $dataUserEdit);
+    }
+
+    public function changePassword($request)
+    {
+        $passwordNew['password'] = Hash::make($request->passwordAfter);
+        return $this->clientRepository->updateUser(Auth::user()->id, $passwordNew);
     }
 }

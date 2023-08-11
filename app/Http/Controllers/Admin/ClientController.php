@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\Admin\ClientRequest;
 use App\Http\Requests\User\Admin\UserRequest;
+use App\Http\Requests\User\PasswordRequest;
 use App\Services\Admin\ClientService;
 use Illuminate\Http\Request;
 
@@ -31,7 +33,7 @@ class ClientController extends Controller
         return view('admin.user.create');
     }
 
-    public function store(UserRequest $request)
+    public function store(ClientRequest $request)
     {
         $this->clientService->store($request);
         return redirect()->route('admin.users.list');
@@ -43,7 +45,7 @@ class ClientController extends Controller
         return view('admin.user.update',['user' => $user]);
     }
 
-    public function update(UserRequest $request)
+    public function update(ClientRequest $request)
     {
         $this->clientService->update($request);
         return redirect()->route('admin.users.list');
@@ -52,6 +54,14 @@ class ClientController extends Controller
     public function delete(Request $request)
     {
         return $this->clientService->delete($request);
+    }
+
+    public function updateProfile(UserRequest $request) {
+        return $this->clientService->updateProfile($request);
+    }
+
+    public function changePassword(PasswordRequest $request) {
+        return $this->clientService->changePassword($request);
     }
 }
 

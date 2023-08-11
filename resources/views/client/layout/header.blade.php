@@ -71,7 +71,6 @@
             <div class="modal-body row">
                 <div class="col-lg-2 col-md-6 col-12"> 
                     <div class="form-floating">
-                        <input type="hidden" name="id" value="{{Auth::user()->id}}">
                         <input type="text" name="employee_code" class="form-control" value="{{Auth::user()->employee_code}}" @disabled(true)>
                         <label for="floatingInput">Mã nhân viên</label>
                         <span class="text-danger employee_code-error"></span>
@@ -141,6 +140,19 @@
                         <label for="floatingInput">Thành Phố</label>
                     </div>
                 </div>
+                <div class="col-lg-2 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="phone" class="form-control" value="{{Auth::user()->phone}}">
+                        <label for="floatingInput">Số điện thoại</label>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}">
+                        <label for="floatingInput">E-mail</label>
+                        <span class="text-danger email-error"></span>
+                    </div>
+                </div>
                 <div class="col-lg-4 col-md-6 col-12"> 
                     <div class="form-floating">
                         <input type="hidden" name="imageBefore" value="{{Auth::user()->avatar}}">
@@ -148,35 +160,54 @@
                         <label for="floatingInput">Ảnh đại diện</label>
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-12"> 
-                    <div class="form-floating">
-                        <input type="text" name="phone" class="form-control" value="{{Auth::user()->phone}}">
-                        <label for="floatingInput">Số điện thoại</label>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-12"> 
-                    <div class="form-floating">
-                        <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}">
-                        <label for="floatingInput">E-mail</label>
-                        <span class="text-danger email-error"></span>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6 col-12"> 
-                    <div class="form-floating">
-                        <button class="btn btn-change-password">Đổi mật khẩu</button>
-                    </div>
-                </div>
-                <div class="enter-again-password"> </div>
                 @if (Auth::user()->avatar !== config('constants.value.null'))
-                    <div class="col-lg-4 col-md-6 col-12 image-upload-update-user-client">
+                    <div class="col-lg-3 col-md-6 col-12 image-upload-update-user-client">
                         <button type="button" class="btn btn-danger delete-image-update-user-client"><i class="fas fa-trash-alt"></i></button>
                         <img class="img-thumbnail image-display-update-user-client" src="{{ asset(Auth::user()->avatar) }}">
                     </div>
                 @endif
             </div>
             <div class="modal-footer">
-                <a href="{{ route('logout') }}" class="btn btn-logout">Đăng xuất</a>
-                <button type="button" class="custom-btn update-user-client">Cập nhật</button>
+                <a href="{{ route('logout') }}" class="btn btn-danger">Đăng xuất</a>
+                <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#staticBackdropChangePassword">Đổi mật khẩu</button>
+                <button type="button" class="custom-btn update-profile-client">Cập nhật thông tin</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="staticBackdropChangePassword" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-s">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Đổi mật khẩu</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-lg-12 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="password" name="passwordBefore" class="form-control">
+                        <label for="floatingInput">Mật khẩu cũ</label>
+                        <span class="text-danger passwordBefore-error"></span>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="password" name="passwordAfter" class="form-control">
+                        <label for="floatingInput">Mật khẩu mới</label>
+                        <span class="text-danger passwordAfter-error"></span>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-6 col-12"> 
+                    <div class="form-floating">
+                        <input type="password" name="againPasswordAfter" class="form-control">
+                        <label for="floatingInput">Nhập lại mật khẩu mới</label>
+                        <span class="text-danger againPasswordAfter-error"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="custom-btn change-password-client">Cập nhật mật khẩu</button>
             </div>
         </div>
         </div>

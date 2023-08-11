@@ -39,12 +39,19 @@ $.ajax({
   success: function success(response) {
     var arrMonth = [];
     var arrValue = [];
-    for (var i = 0; i < response.length; i++) {
-      arrMonth.push(response[i].month);
-      arrValue.push(response[i].count);
+    var arrQuestion = [];
+    var arrCountTicket = [];
+    for (var i = 0; i < response.ticketStatistical.length; i++) {
+      arrMonth.push(response.ticketStatistical[i].month);
+      arrValue.push(response.ticketStatistical[i].count);
     }
-    var ctx = document.getElementById("myAreaChart");
-    new Chart(ctx, {
+    for (var _i = 0; _i < response.questionStatistical.length; _i++) {
+      arrQuestion.push(response.questionStatistical[_i].question);
+      arrCountTicket.push(response.questionStatistical[_i].countTicket);
+    }
+    var ctx1 = document.getElementById("myAreaChart");
+    var ctx2 = document.getElementById("myPieChart");
+    new Chart(ctx1, {
       type: 'line',
       data: {
         labels: arrMonth,
@@ -91,7 +98,6 @@ $.ajax({
             ticks: {
               maxTicksLimit: 5,
               padding: 10,
-              // Include a dollar sign in the ticks
               callback: function callback(value, index, values) {
                 return +number_format(value) + ' ticket';
               }
@@ -129,6 +135,38 @@ $.ajax({
             }
           }
         }
+      }
+    });
+    $('.question-primary').html('<i class="fas fa-circle text-primary"></i> ' + arrQuestion[0]);
+    $('.question-success').html('<i class="fas fa-circle text-success"></i> ' + arrQuestion[1]);
+    $('.question-info').html('<i class="fas fa-circle text-info"></i> ' + arrQuestion[2]);
+    new Chart(ctx2, {
+      type: 'doughnut',
+      data: {
+        labels: arrQuestion,
+        datasets: [{
+          data: arrCountTicket,
+          backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+          hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
+          hoverBorderColor: "rgba(234, 236, 244, 1)"
+        }]
+      },
+      options: {
+        maintainAspectRatio: false,
+        tooltips: {
+          backgroundColor: "rgb(255,255,255)",
+          bodyFontColor: "#858796",
+          borderColor: '#dddfeb',
+          borderWidth: 1,
+          xPadding: 15,
+          yPadding: 15,
+          displayColors: false,
+          caretPadding: 10
+        },
+        legend: {
+          display: false
+        },
+        cutoutPercentage: 80
       }
     });
   }

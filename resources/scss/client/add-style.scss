@@ -65,8 +65,7 @@
   }
 }
 
-.btn.btn-logout{
-  background: #FF0000;
+.btn.btn-danger{
   border: 2px solid transparent;
   border-radius: 100px;
   line-height: normal;
@@ -74,26 +73,23 @@
   padding: 10px 20px;
   font-size: 18px;
   font-weight: 600;
-  color: white;
 }
 
-.btn.btn-logout:hover{
+.btn.btn-secondary{
+  border: 2px solid transparent;
+  border-radius: 100px;
+  line-height: normal;
+  transition: all 0.3s;
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.btn.btn-danger:hover{
   background: #770000;
 }
 
-.btn.btn-change-password{
-    background: #c2c2c2;
-    border: 2px solid transparent;
-    border-radius: 100px;
-    line-height: normal;
-    transition: all 0.3s;
-    padding: 15px 23px;
-    font-size: 18px;
-    font-weight: 600;
-    color: white;
-}
-
-.btn.btn-logout:hover{
+.btn.btn-secondary:hover{
   background: #d2d2d2;
 }
 

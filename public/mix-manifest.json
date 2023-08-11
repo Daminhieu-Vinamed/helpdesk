@@ -1,11 +1,11 @@
 {
     "/js/client/ticket.js": "/js/client/ticket.js",
-    "/js/client/client.js": "/js/client/client.js",
-    "/js/client/modal.js": "/js/client/modal.js",
+    "/js/client/modal-profile.js": "/js/client/modal-profile.js",
     "/js/admin/client.js": "/js/admin/client.js",
     "/js/admin/ticket.js": "/js/admin/ticket.js",
     "/js/admin/question.js": "/js/admin/question.js",
     "/js/admin/dashboard.js": "/js/admin/dashboard.js",
+    "/js/admin/modal-profile.js": "/js/admin/modal-profile.js",
     "/css/client/add-style.css": "/css/client/add-style.css",
     "/css/admin/add-style.css": "/css/admin/add-style.css"
 }
